@@ -7,8 +7,24 @@
         <servlet-name>RegistServlet</servlet-name>
         <servlet-class>com.bishop.web.servlet.RegistServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckUserNameServlet</servlet-name>
+        <servlet-class>com.bishop.web.servlet.CheckUserNameServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyCodeServlet</servlet-name>
+        <servlet-class>com.bishop.web.servlet.VerifyCodeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckUserNameServlet</servlet-name>
+        <url-pattern>/checkUsername</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyCodeServlet</servlet-name>
+        <url-pattern>/verifyCode</url-pattern>
     </servlet-mapping>
 </web-app>
