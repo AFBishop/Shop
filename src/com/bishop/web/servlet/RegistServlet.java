@@ -26,6 +26,7 @@ public class RegistServlet extends HttpServlet {
         User user = new User();
         UserService userService = new UserService();
         Map<String, String[]> properties = request.getParameterMap();
+        String verifyCode = properties.get("code")[0];
         try {
             BeanUtils.populate(user, properties);
         } catch (IllegalAccessException e) {
@@ -49,19 +50,25 @@ public class RegistServlet extends HttpServlet {
         user.setState(0);
         String activeCode = CommonsUtils.getUUID();
         user.setCode(activeCode);
-        boolean isRegistSuccess = userService.regist(user);
-        if(isRegistSuccess){
-            String emailMsg = "恭喜您注册成功，请点击下面的连接进行激活账户\"\n" +
-                   "<a href='http://localhost:8080/HeimaShop/active?activeCode="+activeCode+"'>" +
-                    "http://localhost:8080/HeimaShop/active?activeCode="+activeCode+"</a>";
-            try {
-                MailUtils.sendMail(user.getEmail(), emailMsg);
-            } catch (MessagingException e) {
-                e.printStackTrace();
+
+        if (verifyCode.toUpperCase().equals(request.getSession().getAttribute("verifyCode").toString().toUpperCase())) {
+            boolean isRegistSuccess = userService.regist(user);
+            if (isRegistSuccess) {
+                String emailMsg = "恭喜您注册成功，请点击下面的连接进行激活账户\"\n" +
+                        "<a href='http://localhost:8080/HeimaShop/active?activeCode=" + activeCode + "'>" +
+                        "http://localhost:8080/HeimaShop/active?activeCode=" + activeCode + "</a>";
+                try {
+                    MailUtils.sendMail(user.getEmail(), emailMsg);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+                response.sendRedirect(request.getContextPath() + "/registerSuccess.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/registerFail.jsp");
             }
-            response.sendRedirect(request.getContextPath()+"/registerSuccess.jsp");
         }else {
-            response.sendRedirect(request.getContextPath()+"/registerFail.jsp");
+            response.sendRedirect(request.getContextPath() + "/register.jsp");
         }
+
     }
 }

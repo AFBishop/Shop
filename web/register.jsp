@@ -155,14 +155,14 @@
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-6">
-                        <input type="password" class="form-control" id="inputPassword3" name="password"
+                        <input type="password" class="form-control" id="password" name="password"
                                placeholder="请输入密码">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="confirmpwd" class="col-sm-2 control-label">确认密码</label>
                     <div class="col-sm-6">
-                        <input type="password" class="form-control" id="confirmpwd" name="repassword"
+                        <input type="password" class="form-control" id="repassowrd" name="repassword"
                                placeholder="请输入确认密码">
                     </div>
                 </div>
@@ -208,7 +208,7 @@
                 <div class="form-group">
                     <label for="date" class="col-sm-2 control-label">验证码</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" accept="verifyCode">
+                        <input type="text" class="form-control" name="code">
 
                     </div>
                     <div class="col-sm-2">
